@@ -1,0 +1,7 @@
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\bin\Debug\PlayFair Cipher Csharp.exe.config
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\bin\Debug\PlayFair Cipher Csharp.exe
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\bin\Debug\PlayFair Cipher Csharp.pdb
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\obj\Debug\PlayFair Cipher Csharp.csprojAssemblyReference.cache
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\obj\Debug\PlayFair Cipher Csharp.csproj.CoreCompileInputs.cache
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\obj\Debug\PlayFair Cipher Csharp.exe
+C:\Users\Spoxx\Desktop\PlayFair Cipher Csharp\PlayFair Cipher Csharp\obj\Debug\PlayFair Cipher Csharp.pdb
