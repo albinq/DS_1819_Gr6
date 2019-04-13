@@ -10,17 +10,33 @@ namespace PlayFair_Cipher_Csharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Te shenohet mesazhi:");
-            string Text = Console.ReadLine();
-            Console.WriteLine("Mesazhi origjinal: " + Text);
-            string plainText = Playfair.plain(Text);
-            Console.WriteLine("Mesazhi i rregulluar: " + plainText);
-            string key ="abcdefghiklmnopqrstuvwxyz";
-            string cipherText = Playfair.Enkriptim(key, plainText);
-            Console.WriteLine("Mesazhi i enkriptuar: " + cipherText);
-            plainText = Playfair.Dekriptimi(key, cipherText);
-            Console.WriteLine("Mesazhi i dekriptuar: "+plainText);
-            Console.ReadLine();
+            Console.WriteLine("Per Enkriptim shtypni 'E' per Dekriptim shtypni 'D'");
+            char x = Convert.ToChar(Console.ReadLine());
+            if (x == 'E' || x == 'e')
+            {
+
+                Console.WriteLine("Te shenohet mesazhi:");
+                string Text = Console.ReadLine();
+                string plainText = Playfair.plain(Text);
+                Console.WriteLine("Mesazhi i rregulluar: " + plainText);
+                string key = "abcdefghiklmnopqrstuvwxyz";
+                Console.WriteLine("Qelsi: "+key);
+                string cipherText = Playfair.Enkriptim(key, plainText);
+                Console.WriteLine("Mesazhi i enkriptuar: " + cipherText);
+                Console.ReadLine();
+            }
+            else if (x == 'D' || x == 'd')
+            {
+                Console.WriteLine("Te shenohet mesazhi:");
+                string Text = Console.ReadLine();
+                string plainText = Playfair.plain(Text);
+                Console.WriteLine("Mesazhi i rregulluar: " + plainText);
+                string key = "abcdefghiklmnopqrstuvwxyz";
+                Console.WriteLine("Qelsi: " + key);
+                plainText = Playfair.Dekriptimi(key, plainText);
+                Console.WriteLine("Mesazhi i dekriptuar: " + plainText);
+                Console.ReadLine();
+            }
         }
     }
     public class Playfair
