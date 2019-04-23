@@ -10,40 +10,81 @@ namespace PlayFair_Cipher_Csharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Per Enkriptim shtypni 'E' per Dekriptim shtypni 'D'");
-            char x = Convert.ToChar(Console.ReadLine());
-            if (x == 'E' || x == 'e')
-            {
-
-                Console.WriteLine("Te shenohet mesazhi:");
+            char[] arr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            //Console.WriteLine("Per Enkriptim shtypni 'E' per Dekriptim shtypni 'D'");
+            //char x = Convert.ToChar(Console.ReadLine());
+            //if (x == 'E' || x == 'e')
+            //{
+            Console.WriteLine("Enkriptimi:");
+            Console.WriteLine("Te shenohet mesazhi:");
                 string Text = Console.ReadLine();
+
                 string plainText = Playfair.plain(Text);
                 Console.WriteLine("Mesazhi i rregulluar: " + plainText);
-                string key = "abcdefghiklmnopqrstuvwxyz";
-                Console.WriteLine("Qelsi: "+key);
+            
+                string key="abcdefghiklmnopqrstuvwxyz";
+            int length1 = Text.Length;
+            Text = Text.ToLower();
+
+            for (int i = 0; i < length1; i++)
+            {
+                if (Text[i] == 'j')
+                {
+                   key = "abcdefghjklmnopqrstuvwxyz";
+                }
+            }
+            //Console.WriteLine("Key: ");
+            //key = Console.ReadLine();
+            Console.WriteLine("Qelsi: "+key);
                 string cipherText = Playfair.Enkriptim(key, plainText);
                 Console.WriteLine("Mesazhi i enkriptuar: " + cipherText);
-                Console.ReadLine();
-            }
-            else if (x == 'D' || x == 'd')
-            {
-                Console.WriteLine("Te shenohet mesazhi:");
-                string Text = Console.ReadLine();
-                string plainText = Playfair.plain(Text);
+             
+
+
+            // }
+            //else if (x == 'D' || x == 'd')
+            //{
+
+            Console.WriteLine("Dekriptimi:");
+            Console.WriteLine("Te shenohet mesazhi:");
+                 Text = Console.ReadLine();
+            int length = Text.Length;
+            Text = Text.ToLower();
+
+                for (int i = 0; i < length; i++)
+                {
+                    if (Text[i] == 'j')
+                    {
+                        key = "abcdefghjklmnopqrstuvwxyz";
+                    }
+                }
+            plainText = Playfair.plain(Text);
                 Console.WriteLine("Mesazhi i rregulluar: " + plainText);
-                string key = "abcdefghiklmnopqrstuvwxyz";
+
+               key = "abcdefghiklmnopqrstuvwxyz";
+            
+                //Console.WriteLine("Key: ");
+                //key = Console.ReadLine();
                 Console.WriteLine("Qelsi: " + key);
                 plainText = Playfair.Dekriptimi(key, plainText);
                 Console.WriteLine("Mesazhi i dekriptuar: " + plainText);
+               
                 Console.ReadLine();
-            }
+               
+            //}
+
         }
+        
+           
     }
+    
+
     public class Playfair
     {
 
         public static string plain(string Text)
         {
+
             int length = Text.Length;
             Text = Text.ToLower();
             StringBuilder sb = new StringBuilder();
@@ -51,13 +92,15 @@ namespace PlayFair_Cipher_Csharp
             for (int i = 0; i < length; i++)
             {
                 char c = Text[i];
-
-                if (sb.Length % 2 == 1 && sb[sb.Length - 1] == c)
+               
+                if (c >= 97 && c <= 122)
                 {
-                    sb.Append('x');
+                    if (sb.Length % 2 == 1 && sb[sb.Length - 1] == c)
+                    {
+                        sb.Append('x');
+                    }
+                    sb.Append(c);
                 }
-                sb.Append(c);
-                
             }
             if (sb.Length % 2 == 1)
             {
@@ -77,29 +120,24 @@ namespace PlayFair_Cipher_Csharp
             for (int i = 0; i < length; i += 2)
             {
                 a = plainText[i];
-                Console.WriteLine("\nKjo eshte a=plainttext[i]: " + a);
+                
                 b = plainText[i + 1];
-                Console.WriteLine("\nKjo eshte b=plainttext[i+1]: " + b);
+                
 
 
                 a_pozita = key.IndexOf(a);
-                Console.WriteLine("\nKjo eshte a_pozita: " + a_pozita);
-
+               
                 b_pozita = key.IndexOf(b);
-                Console.WriteLine("\nKjo eshte b_pozita: " + b_pozita);
-
+               
                 a_row = a_pozita / 5;
-                Console.WriteLine("\nKjo eshte a_row: " + a_row);
-
+                
                 b_row = b_pozita / 5;
-                Console.WriteLine("\nKjo eshte b_row: " + b_row);
+                
 
                 a_col = a_pozita % 5;
-                Console.WriteLine("\nKjo eshte a_col: " + a_col);
-
+                
                 b_col = b_pozita % 5;
-                Console.WriteLine("\nKjo eshte b_col: " + b_col);
-
+                
 
                 if (a_row == b_row)
                 {
@@ -144,6 +182,7 @@ namespace PlayFair_Cipher_Csharp
                 }
             }
             return sb.ToString();
+
         }
         public static string Dekriptimi(string key, string cipherText)
         {
@@ -208,5 +247,13 @@ namespace PlayFair_Cipher_Csharp
             }
             return sb.ToString();
         }
+
+        
+
     }
+
 }
+
+
+
+
