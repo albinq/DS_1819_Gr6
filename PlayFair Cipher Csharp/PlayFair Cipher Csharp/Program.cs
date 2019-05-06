@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace PlayFair_Cipher_Csharp
 {
@@ -10,81 +8,72 @@ namespace PlayFair_Cipher_Csharp
     {
         static void Main(string[] args)
         {
-            char[] arr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-            //Console.WriteLine("Per Enkriptim shtypni 'E' per Dekriptim shtypni 'D'");
-            //char x = Convert.ToChar(Console.ReadLine());
-            //if (x == 'E' || x == 'e')
-            //{
-            Console.WriteLine("Enkriptimi:");
-            Console.WriteLine("Te shenohet mesazhi:");
-                string Text = Console.ReadLine();
-
-                string plainText = Playfair.plain(Text);
-                Console.WriteLine("Mesazhi i rregulluar: " + plainText);
-            
-                string key="abcdefghiklmnopqrstuvwxyz";
-            int length1 = Text.Length;
-            Text = Text.ToLower();
-
-            for (int i = 0; i < length1; i++)
-            {
-                if (Text[i] == 'j')
-                {
-                   key = "abcdefghjklmnopqrstuvwxyz";
-                }
-            }
-            //Console.WriteLine("Key: ");
-            //key = Console.ReadLine();
-            Console.WriteLine("Qelsi: "+key);
-                string cipherText = Playfair.Enkriptim(key, plainText);
-                Console.WriteLine("Mesazhi i enkriptuar: " + cipherText);
-             
-
-
-            // }
-            //else if (x == 'D' || x == 'd')
-            //{
-
-            Console.WriteLine("Dekriptimi:");
-            Console.WriteLine("Te shenohet mesazhi:");
-                 Text = Console.ReadLine();
+            Console.WriteLine("Të shënohet mesazhi:");
+            string Text = Console.ReadLine();
             int length = Text.Length;
             Text = Text.ToLower();
-
-                for (int i = 0; i < length; i++)
-                {
-                    if (Text[i] == 'j')
-                    {
-                        key = "abcdefghjklmnopqrstuvwxyz";
-                    }
-                }
-            plainText = Playfair.plain(Text);
-                Console.WriteLine("Mesazhi i rregulluar: " + plainText);
-
-               key = "abcdefghiklmnopqrstuvwxyz";
+            for (int i = 0; i < length; i++)
+            {
+                if (Text[i] == 'j')
+                Text = Text.Replace("j", "i");
+            }
+            string alphabet = "abcdefghiklmnopqrstuvwxyz";
+            string plainText = Playfair.plain(Text);
+            Console.WriteLine("\nMesazhi i rregulluar: " + plainText);
+            Console.WriteLine("\nQelësi:");
+            string key = Console.ReadLine();
+            key = key.ToLower();
+            Console.WriteLine("\nMatrica:");
+            for (int i = 0; i < key.Length; i++)
+            {
+                if (key[i] == 'j')
+                key = key.Replace("j", "i");
+            }
+            //char[] c1 = alphabet.ToCharArray();
+            //char[] c2 = key.ToCharArray();
+            key = RemoveDuplicates(key);
+            var diff = alphabet.Except(key);
             
-                //Console.WriteLine("Key: ");
-                //key = Console.ReadLine();
-                Console.WriteLine("Qelsi: " + key);
+            foreach (var value in diff)
+            {
+                
+                key = key + value;
+            }
+            key = key.Replace(" ", string.Empty);
+            for (int i = 0; i < key.Length; i++)
+            {
+                if (i == 5 || i == 10 || i == 15 || i == 20 || i == 25)
+                {
+                    Console.WriteLine();
+                }
+                string n = key[i] + " ";
+                Console.Write(n);
+            }
+            Console.WriteLine("\n\nPër Enkriptim shtypni 'E' për Dekriptim shtypni 'D'");
+            char x = Convert.ToChar(Console.ReadLine());
+            if (x == 'E' || x == 'e')
+            {
+                Console.WriteLine("\nEnkriptimi:\n");
+                string cipherText = Playfair.Enkriptim(key, plainText);
+                Console.WriteLine("Mesazhi i enkriptuar: " + cipherText);
+            }
+            else if (x == 'D' || x == 'd')
+            {
+                Console.WriteLine("\nDekriptimi:\n");
                 plainText = Playfair.Dekriptimi(key, plainText);
                 Console.WriteLine("Mesazhi i dekriptuar: " + plainText);
-               
-                Console.ReadLine();
-               
-            //}
-
+            }
         }
-        
-           
+        //largimi i "space" nga qelësi
+        public static string RemoveDuplicates(string key)
+        {
+            return new string(key.ToCharArray().Distinct().ToArray());
+        }
     }
-    
-
     public class Playfair
     {
-
-        public static string plain(string Text)
+       public static string plain(string Text)
         {
-
             int length = Text.Length;
             Text = Text.ToLower();
             StringBuilder sb = new StringBuilder();
@@ -120,25 +109,13 @@ namespace PlayFair_Cipher_Csharp
             for (int i = 0; i < length; i += 2)
             {
                 a = plainText[i];
-                
                 b = plainText[i + 1];
-                
-
-
                 a_pozita = key.IndexOf(a);
-               
                 b_pozita = key.IndexOf(b);
-               
                 a_row = a_pozita / 5;
-                
                 b_row = b_pozita / 5;
-                
-
                 a_col = a_pozita % 5;
-                
                 b_col = b_pozita % 5;
-                
-
                 if (a_row == b_row)
                 {
                     if (a_col == 4)
@@ -247,11 +224,11 @@ namespace PlayFair_Cipher_Csharp
             }
             return sb.ToString();
         }
-
-        
-
-    }
-
+        //me ndreq x kur del nfund
+        //simbolet te qelsi
+        //me vazhdu
+        //me zgjesh i ose j apo me hjek q
+        }
 }
 
 
