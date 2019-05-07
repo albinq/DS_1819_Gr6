@@ -8,39 +8,50 @@ namespace PlayFair_Cipher_Csharp
     {
         static void Main(string[] args)
         {
+            string alphabet = "abcdefghiklmnopqrstuvwxyz";
             Console.WriteLine("Të shënohet mesazhi:");
             string Text = Console.ReadLine();
             int length = Text.Length;
             Text = Text.ToLower();
+
             for (int i = 0; i < length; i++)
             {
                 if (Text[i] == 'j')
-                Text = Text.Replace("j", "i");
+                    Text = Text.Replace("j", "i");
             }
-            string alphabet = "abcdefghiklmnopqrstuvwxyz";
+
             string plainText = Playfair.plain(Text);
             Console.WriteLine("\nMesazhi i rregulluar: " + plainText);
+            Console.WriteLine("\nShkruani '/i' per alfabet pa i");
+            Console.WriteLine("\nShkruani '/j' per alfabet pa j");
+            Console.WriteLine("\nShkruani '/q' per alfabet pa q");
             Console.WriteLine("\nQelësi:");
             string key = Console.ReadLine();
-            key = key.ToLower();
-            Console.WriteLine("\nMatrica:");
-            for (int i = 0; i < key.Length; i++)
-            {
-                if (key[i] == 'j')
-                key = key.Replace("j", "i");
-            }
-            //char[] c1 = alphabet.ToCharArray();
-            //char[] c2 = key.ToCharArray();
+            key = new String(key.Where(Char.IsLetter).ToArray());
             key = RemoveDuplicates(key);
+            key = key.ToLower();
+
+            if (key == "/i")
+            {
+                key = "abcdefghjklmnopqrstuvwxyz";
+            }
+            else if (key == "/j")
+            {
+                key = "abcdefghiklmnopqrstuvwxyz";
+            }
+            else if (key == "/q")
+            {
+                key = "abcdefghijklmnoprstuvwxyz";
+            }
+            Console.WriteLine("\nMatrica:");
             var diff = alphabet.Except(key);
-            
             foreach (var value in diff)
             {
-                
                 key = key + value;
+
             }
             key = key.Replace(" ", string.Empty);
-            for (int i = 0; i < key.Length; i++)
+            for (int i = 0; i < 25; i++)
             {
                 if (i == 5 || i == 10 || i == 15 || i == 20 || i == 25)
                 {
@@ -72,7 +83,7 @@ namespace PlayFair_Cipher_Csharp
     }
     public class Playfair
     {
-       public static string plain(string Text)
+        public static string plain(string Text)
         {
             int length = Text.Length;
             Text = Text.ToLower();
@@ -81,7 +92,7 @@ namespace PlayFair_Cipher_Csharp
             for (int i = 0; i < length; i++)
             {
                 char c = Text[i];
-               
+
                 if (c >= 97 && c <= 122)
                 {
                     if (sb.Length % 2 == 1 && sb[sb.Length - 1] == c)
@@ -224,11 +235,9 @@ namespace PlayFair_Cipher_Csharp
             }
             return sb.ToString();
         }
-        //me ndreq x kur del nfund
-        //simbolet te qelsi
-        //me vazhdu
-        //me zgjesh i ose j apo me hjek q
-        }
+
+
+    }
 }
 
 
