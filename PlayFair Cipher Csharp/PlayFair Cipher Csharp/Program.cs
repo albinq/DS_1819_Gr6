@@ -11,7 +11,7 @@ namespace PlayFair_Cipher_Csharp
             while(true)
             { 
             string alphabet = "abcdefghiklmnopqrstuvwxyz";
-            Console.WriteLine("\n\nTë shënohet mesazhi:");
+            Console.WriteLine("Të shënohet mesazhi:");
             string Text = Console.ReadLine();
             int length = Text.Length;
             Text = Text.ToLower();
@@ -83,6 +83,7 @@ namespace PlayFair_Cipher_Csharp
                 Console.WriteLine("\nKomanda eshte invalide");
                 goto l;
             }
+                Console.WriteLine("\n\n");
             }
         }
        
