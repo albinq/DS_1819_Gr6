@@ -29,7 +29,6 @@ namespace PlayFair_Cipher_Csharp
             Console.WriteLine("\nShkruani '/q' për alfabet pa q");
             Console.WriteLine("\nQelësi:");
             string key = Console.ReadLine();
-            key = new String(key.Where(Char.IsLetter).ToArray());
             key = RemoveDuplicates(key);
             key = key.ToLower();
 
@@ -45,7 +44,7 @@ namespace PlayFair_Cipher_Csharp
             {
                 key = "abcdefghijklmnoprstuvwxyz";
             }
-
+            key = new String(key.Where(Char.IsLetter).ToArray());
             Console.WriteLine("\nMatrica:");
             var diff = alphabet.Except(key);
             foreach (var value in diff)
@@ -246,9 +245,6 @@ namespace PlayFair_Cipher_Csharp
             }
             return sb.ToString();
         }
-       
-       
-
     }
 }
 
