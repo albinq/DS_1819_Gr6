@@ -7,9 +7,11 @@ namespace PlayFair_Cipher_Csharp
     class Program
     {
         static void Main(string[] args)
-        {
+        { 
+            while(true)
+            { 
             string alphabet = "abcdefghiklmnopqrstuvwxyz";
-            Console.WriteLine("Të shënohet mesazhi:");
+            Console.WriteLine("\n\nTë shënohet mesazhi:");
             string Text = Console.ReadLine();
             int length = Text.Length;
             Text = Text.ToLower();
@@ -17,14 +19,14 @@ namespace PlayFair_Cipher_Csharp
             for (int i = 0; i < length; i++)
             {
                 if (Text[i] == 'j')
-                    Text = Text.Replace("j", "i");
+                Text = Text.Replace("j", "i");
             }
 
             string plainText = Playfair.plain(Text);
             Console.WriteLine("\nMesazhi i rregulluar: " + plainText);
-            Console.WriteLine("\nShkruani '/i' per alfabet pa i");
-            Console.WriteLine("\nShkruani '/j' per alfabet pa j");
-            Console.WriteLine("\nShkruani '/q' per alfabet pa q");
+            Console.WriteLine("\nShkruani '/i' për alfabet pa i");
+            Console.WriteLine("\nShkruani '/j' për alfabet pa j");
+            Console.WriteLine("\nShkruani '/q' për alfabet pa q");
             Console.WriteLine("\nQelësi:");
             string key = Console.ReadLine();
             key = new String(key.Where(Char.IsLetter).ToArray());
@@ -43,12 +45,12 @@ namespace PlayFair_Cipher_Csharp
             {
                 key = "abcdefghijklmnoprstuvwxyz";
             }
+
             Console.WriteLine("\nMatrica:");
             var diff = alphabet.Except(key);
             foreach (var value in diff)
             {
                 key = key + value;
-
             }
             key = key.Replace(" ", string.Empty);
             for (int i = 0; i < 25; i++)
@@ -60,25 +62,33 @@ namespace PlayFair_Cipher_Csharp
                 string n = key[i] + " ";
                 Console.Write(n);
             }
+            l:
             Console.WriteLine("\n\nPër Enkriptim shtypni 'E' për Dekriptim shtypni 'D'");
-            char x = Convert.ToChar(Console.ReadLine());
-            if (x == 'E' || x == 'e')
+            string x = Console.ReadLine();
+            x=x.ToLower();
+            if ( x == "e")
             {
                 Console.WriteLine("\nEnkriptimi:\n");
                 string cipherText = Playfair.Enkriptim(key, plainText);
                 Console.WriteLine("Mesazhi i enkriptuar: " + cipherText);
             }
-            else if (x == 'D' || x == 'd')
+            else if ( x == "d")
             {
                 Console.WriteLine("\nDekriptimi:\n");
                 plainText = Playfair.Dekriptimi(key, plainText);
                 Console.WriteLine("Mesazhi i dekriptuar: " + plainText);
             }
+            else 
+            {
+                Console.WriteLine("\nKomanda eshte invalide");
+                goto l;
+            }
+            }
         }
-        //largimi i "space" nga qelësi
-        public static string RemoveDuplicates(string key)
+       
+        public static string RemoveDuplicates(string text)
         {
-            return new string(key.ToCharArray().Distinct().ToArray());
+            return new string(text.ToCharArray().Distinct().ToArray());
         }
     }
     public class Playfair
@@ -235,7 +245,8 @@ namespace PlayFair_Cipher_Csharp
             }
             return sb.ToString();
         }
-
+       
+       
 
     }
 }
